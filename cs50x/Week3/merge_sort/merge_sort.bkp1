@@ -1,0 +1,82 @@
+#include <stdio.h>
+
+void sort(int start, int end, int numbers[end - start]);
+void merge(int lh_start, int lh_end, int rh_start, int rh_end, int numbers[rh_end + 1]);
+
+int main()
+{
+    int length = 8;
+    int numbers [] = {7, 5, 1, 4, 3, 2, 8, 6};
+
+    sort(0, length - 1, numbers);
+
+
+
+    for (int i = 0; i < length; i++)
+    {
+        printf("%i ", numbers[i]);
+    }
+    printf("\n");
+
+}
+
+void sort(int start, int end, int numbers[end - start])
+{
+    if ((end - start) == 0)
+    {
+        return;
+    }
+
+    int lh_start = start;
+    int lh_end = lh_start + (end - start) / 2;
+    int rh_start = lh_end + 1;
+    int rh_end = end;
+
+    // sort left hand side
+    sort(lh_start, lh_end, numbers);
+    // sort right hand side
+    sort(rh_start, rh_end, numbers);
+
+    merge(lh_start, lh_end, rh_start, rh_end, numbers);
+}
+
+void merge(int lh_start, int lh_end, int rh_start, int rh_end, int numbers[rh_end + 1])
+{
+    int lh = lh_start, rh = rh_start, k = lh_start;
+    int temp_numbers[rh_end + 1];
+
+    while (lh <= lh_end || rh <= rh_end)
+    {
+        if (lh_start == 4 && rh_end == 7)
+        {
+            int x = 1;
+        }
+
+        if (numbers[lh] < numbers[rh] || rh > rh_end)
+        {
+            temp_numbers[k] = numbers[lh];
+            lh++;
+            k++;
+        }
+        else if (numbers[rh] < numbers[lh] || lh > lh_end)
+        {
+            temp_numbers[k] = numbers[rh];
+            rh++;
+            k++;
+        }
+        else
+        {
+            temp_numbers[k] = numbers[lh];
+            temp_numbers[k + 1] = numbers[rh];
+            lh++;
+            rh++;
+            k += 2;
+        }
+    }
+
+    // copy temp_numbers back to original numbers array
+    for (int i = lh_start; i <= rh_end; i++)
+    {
+        numbers[i] = temp_numbers[i];
+    }
+}

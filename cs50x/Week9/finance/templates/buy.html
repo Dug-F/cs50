@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Buy
+{% endblock %}
+
+{% block main %}
+<form action="/buy" method="post">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-auto offset-4">
+                <label class="mb-2" for="symbol">Symbol</label>
+                <input autocomplete="off" autofocus class="form-control mb-3 mx-auto text-center w-auto" id="symbol"
+                    name="symbol" placeholder="Stock symbol" type="text" value="{{ symbol }}">
+            </div>
+            <div class="col-auto">
+                <label class="mb-2" for="shares">Shares</label>
+                <input autocomplete="off" class="form-control mb-3 mx-auto text-center w-auto" id="shares"
+                    name="shares" min="1" placeholder="Number of shares" type="number" value="{{ shares }}">
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Buy</button>
+</form>
+{% endblock %}

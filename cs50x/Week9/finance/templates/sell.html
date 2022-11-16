@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Log In
+{% endblock %}
+
+{% block main %}
+<form action="/sell" method="post">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-2 offset-4">
+                <label class="mb-2" for="symbol">Symbol</label>
+                <select class="form-control mb-3 mx-auto w-auto" name="symbol">
+                    <option disabled selected>Symbol</option>
+                    {% for holding in holdings %}
+                        {% if holding.total_shares > 0 %}
+                           <option>{{ holding.symbol }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-auto">
+                <label class="mb-2" for="shares">Shares</label>
+                <input autocomplete="off" class="form-control mb-3 mx-auto text-center w-auto" id="shares"
+                    min="1" name="shares" placeholder="Shares" type="number">
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sell</button>
+</form>
+{% endblock %}

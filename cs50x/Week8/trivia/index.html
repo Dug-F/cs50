@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&amp;family=Roboto:wght@100;400;500;700&amp;display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener("DOMContentLoaded", function (event) {
+                document.querySelectorAll('.button-response').forEach(function (button, idx) {
+                    button.addEventListener('click', function () {checkButtonResponseAnswer(this)})
+                });
+
+                document.querySelector('.free-response').addEventListener('click', function() {checkFreeResponseAnswer(this);});
+            });
+
+            function checkButtonResponseAnswer(button) {
+                let questionNum = button.dataset.questionNum;
+                let questionNumLookup = `[data-question-num="${questionNum}"]`
+                let correct = button.dataset.correct;
+                document.querySelectorAll(`[data-question-num="${questionNum}"]`).
+                    forEach(function (btn, idx) {
+                        btn.style.backgroundColor = 'white';
+                })
+                const result = document.querySelector(`p${questionNumLookup}`);
+                if (correct == '1') {
+                    result.innerText = 'Correct!';
+                    button.style.backgroundColor = 'green';
+                } else {
+                    result.innerText = 'Incorrect';
+                    button.style.backgroundColor = 'red';
+                }
+            }
+
+            function checkFreeResponseAnswer(button) {
+                let questionNumLookup = `[data-question-num="${button.dataset.questionNum}"]`
+                let correct = button.dataset.correct;
+                const result = document.querySelector(`p${questionNumLookup}`);
+                const answerElem = document.querySelector(`input${questionNumLookup}`);
+                if (answerElem.value == correct) {
+                    result.innerText = "Correct!";
+                    answerElem.style.color = "green";
+                } else {
+                    result.innerText = "Incorrect!";
+                    answerElem.style.color = "red";
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What is the approximate ratio of people to sheep in New Zealand?</h3>
+                <p data-question-num="1"></p>
+                <div>
+                    <button class="button-response" data-question-num="1">6 people per 1 sheep</button>
+                    <button class="button-response" data-question-num="1">3 people per 1 sheep</button>
+                    <button class="button-response" data-question-num="1">1 person per 1 sheep</button>
+                    <button class="button-response" data-question-num="1">1 person per 3 sheep</button>
+                    <button class="button-response" data-question-num="1" data-correct="1">1 person per 6 sheep</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>In which country is it illegal to own only one guinea pig, as a lone guinea pig might get lonely?</h3>
+                <p data-question-num="2"></p>
+                <div>
+                    <input data-question-num="2" name="answer">
+                    <button class="free-response" data-question-num="2" data-correct="Switzerland">Check Answer</button>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

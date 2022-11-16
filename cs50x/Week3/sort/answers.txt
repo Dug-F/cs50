@@ -1,0 +1,11 @@
+sort1 uses: bubble sort
+
+How do you know?: Large difference between unsorted and sorted times
+
+sort2 uses: merge sort
+
+How do you know?: shorter time for large datasets and relative consistency (cf bubble sort) of times for sorted, reversed, random
+
+sort3 uses: selection sort
+
+How do you know?: No time gain for pre-sorted dataset.
